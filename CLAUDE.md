@@ -66,6 +66,13 @@ docs/                  SPEC.md, DECISIONS.md, protocol write-ups
 - **Don't reformat files you didn't otherwise change.**
 - If a task is underspecified, ask one question rather than picking a direction and building on it.
 
+## Every commit is the author's
+
+Commits are authored and committed as `pchrysostomou <prodromosch@hotmail.co.uk>`, never with a
+`Co-Authored-By` or any other AI trailer. Before any push,
+`git log --format='%an %cn' main..HEAD | sort -u` must print that one line and nothing else; if
+anything else appears, stop and fix the history before it leaves the machine.
+
 ## Definition of done for any change
 
 1. `scripts/gate.sh` has exited 0 on the exact tree being committed, run as that single
@@ -102,6 +109,8 @@ refer to files by absolute path — in CI scripts, in verification loops, in one
 
 ## Things that are deliberately out of scope right now
 
-Byzantine faults, trace shrinking/minimisation, other language bindings, a hosted playground,
+Byzantine faults, trace shrinking/minimisation, other language bindings, a hosted playground
+(running protocols in the browser; the GitHub Pages deploy in `.github/workflows/pages.yml` is
+the studio with a fixed trace beside it, a viewer, not a playground),
 distributed execution of the simulator itself, persistence to disk in protocols. Do not build
 toward these. They are noted only so you don't "helpfully" prepare for them.
