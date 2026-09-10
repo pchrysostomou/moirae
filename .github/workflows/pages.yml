@@ -10,10 +10,10 @@ on:
     branches: [main]
   workflow_dispatch:
 
+# The token is read-only by default. Write permissions live on the one job
+# that needs them (SonarCloud S8233); a job's own block replaces this one.
 permissions:
   contents: read
-  pages: write
-  id-token: write
 
 # One deploy at a time. A newer push supersedes a queued one; a deploy already
 # in flight is left to finish.
@@ -25,8 +25,11 @@ jobs:
   build:
     runs-on: ubuntu-latest
     timeout-minutes: 10
+    permissions:
+      contents: read # checkout
+      pages: read # configure-pages reads the site settings (GET /repos/{owner}/{repo}/pages)
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
       - uses: pnpm/setup@84cb39b217b10273981911c288cd62326dc7c6d2 # v2.0.2
         with:
           runtime: node@24
@@ -41,8 +44,8 @@ jobs:
       # The traces sit next to index.html, so ?trace=clean-partition.jsonl
       # resolves to /moirae/clean-partition.jsonl.
       - run: cp out/*.jsonl apps/studio/dist/
-      - uses: actions/configure-pages@v5
-      - uses: actions/upload-pages-artifact@v3
+      - uses: actions/configure-pages@983d7736d9b0ae728b81ab479565c72886d7745b # v5.0.0
+      - uses: actions/upload-pages-artifact@56afc609e74202658d3ffba0e8f6dda462b719fa # v3.0.1
         with:
           path: apps/studio/dist
 
@@ -50,9 +53,12 @@ jobs:
     needs: build
     runs-on: ubuntu-latest
     timeout-minutes: 5
+    permissions:
+      pages: write # create the Pages deployment
+      id-token: write # the OIDC token that proves where the deployment came from
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
       - id: deployment
-        uses: actions/deploy-pages@v4
+        uses: actions/deploy-pages@d6db90164ac5ed86f2b6aed7e0febac5b3c0c03e # v4.0.5
