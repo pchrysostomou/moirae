@@ -137,8 +137,8 @@ function Landing() {
         writes; it replays byte for byte on any machine.
       </p>
       <p className="muted">
-        To make the example traces: <code>pnpm examples</code>, then open <code>?trace=/clean-partition.jsonl</code>{' '}
-        or <code>?trace=/harsh.jsonl</code>. Add <code>&amp;t=2600</code> to start the playhead 2600 trace time units in — 2.6 seconds
+        To make the example traces: <code>pnpm examples</code>, then open <code>?trace=clean-partition.jsonl</code>{' '}
+        or <code>?trace=harsh.jsonl</code>. Add <code>&amp;t=2600</code> to start the playhead 2600 trace time units in — 2.6 seconds
         for an engine trace, which counts milliseconds; a v2 header says what <code>t</code> counts.
       </p>
     </section>

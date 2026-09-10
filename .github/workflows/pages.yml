@@ -1,0 +1,58 @@
+name: pages
+
+# Deploys the studio to GitHub Pages with the example traces beside it, so
+# the seed-19 demo opens in a browser with nothing installed:
+#   https://pchrysostomou.github.io/moirae/?trace=clean-partition.jsonl
+# Settings > Pages > Build and deployment > Source must be "GitHub Actions".
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# One deploy at a time. A newer push supersedes a queued one; a deploy already
+# in flight is left to finish.
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/setup@84cb39b217b10273981911c288cd62326dc7c6d2 # v2.0.2
+        with:
+          runtime: node@24
+          cache: true
+          install: false
+      - run: pnpm install --frozen-lockfile
+      # Regenerates the example traces into out/ and asserts their pinned
+      # hashes, so the hosted trace is the one CI vouches for.
+      - run: pnpm examples
+      # --mode pages sets base to /moirae/ (apps/studio/vite.config.ts).
+      - run: pnpm --filter @moirae/studio build:pages
+      # The traces sit next to index.html, so ?trace=clean-partition.jsonl
+      # resolves to /moirae/clean-partition.jsonl.
+      - run: cp out/*.jsonl apps/studio/dist/
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: apps/studio/dist
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4
