@@ -9,9 +9,10 @@ the wall tried twelve times to elect a leader and never could — every vote req
 wall. The three on the right side kept theirs. When the wall came down, one election settled it,
 and a node that crashed came back with its log intact.
 
-This is v0: one protocol (Raft), no trace shrinking, no Byzantine faults, no membership changes,
-no pre-vote, nothing hosted. If you arrived expecting Antithesis, this is the small, readable,
-TypeScript end of that idea — not a replacement for it.
+This is v0: three protocols (Raft, single-decree Paxos and the ABD atomic register), no trace
+shrinking, no Byzantine faults, no membership changes, no pre-vote, nothing hosted. If you arrived
+expecting Antithesis, this is the small, readable, TypeScript end of that idea — not a replacement
+for it.
 
 ```
 npx moirae demo

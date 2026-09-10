@@ -1,6 +1,6 @@
 {
   "name": "moirae-protocols",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "type": "module",
   "scripts": {
     "typecheck": "tsc -p tsconfig.json",
@@ -13,7 +13,7 @@
   "exports": {
     ".": "./src/index.ts"
   },
-  "description": "Raft for the moirae simulator, transcribed from the paper, with its safety invariants.",
+  "description": "Raft, single-decree Paxos and the ABD atomic register for the moirae simulator, transcribed from their papers, with their safety invariants.",
   "license": "Apache-2.0",
   "author": "Prodromos Chrysostomou",
   "repository": {
@@ -27,7 +27,9 @@
     "distributed-systems",
     "testing",
     "simulation",
-    "raft"
+    "raft",
+    "paxos",
+    "abd"
   ],
   "files": [
     "dist"
