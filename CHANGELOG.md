@@ -8,7 +8,12 @@ crate is named; PR numbers are on
 
 ## [Unreleased]
 
-Everything on `main` since v0.1.1. None of it is on npm yet.
+Nothing yet.
+
+## [0.2.0] — 2026-09-10
+
+`moirae` 0.2.0, `moirae-core` 0.2.0 and `moirae-protocols` 0.2.0, published together;
+`moirae-protocols` now depends on `moirae-core` `^0.2.0`.
 
 ### Added
 
@@ -27,6 +32,8 @@ Everything on `main` since v0.1.1. None of it is on npm yet.
 - Studio fixtures from a foreign engine, ananke, pinned to that engine's trace hash
   (#51, #52, #54).
 - `scripts/gate.sh`: every CI check as one command, run before every commit (#53).
+- The studio on GitHub Pages with the example traces beside it, so the seed-19 demo opens
+  with nothing installed; the README's launch edits; this changelog (#56).
 - Docs: CONTRIBUTING (#19, #20); the devlog (#15, #16, #21, #35); the negative-assertions essay
   (#16, #17); a Reading section in the README (#18); a section index for the Raft ATC paper
   (#42, by Arush Khasru).
@@ -63,6 +70,7 @@ First release: `moirae`, `moirae-core` and `moirae-protocols` on npm.
   (#9).
 - The workspace, the nondeterminism lint rule, and CI (#1, #4).
 
-[Unreleased]: https://github.com/pchrysostomou/moirae/compare/v0.1.1...HEAD
+[Unreleased]: https://github.com/pchrysostomou/moirae/compare/v0.2.0...HEAD
+[0.2.0]: https://github.com/pchrysostomou/moirae/compare/v0.1.1...v0.2.0
 [0.1.1]: https://github.com/pchrysostomou/moirae/compare/v0.1.0...v0.1.1
 [0.1.0]: https://github.com/pchrysostomou/moirae/releases/tag/v0.1.0

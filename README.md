@@ -56,9 +56,8 @@ npm install moirae-core moirae-protocols
 
 `moirae-core` is the engine, with no dependencies. `moirae-protocols` is the protocols, each with
 its safety invariants, to run under the engine or to copy as a starting point. Both need Node 20
-or newer. On npm today `moirae-protocols` 0.1.0 ships Raft; Paxos and ABD are on `main` and go
-out with the next release. The `moirae` package is the CLI behind `npx moirae`: `demo`, `replay`,
-and the studio bundled with them.
+or newer. The `moirae` package is the CLI behind `npx moirae`: `demo`, `replay`, and the studio
+bundled with them.
 
 An engine written in Rust can write the same trace format: `cargo add moirae-trace`, and
 `moirae-sched` for the scheduler ([ADR-009](docs/DECISIONS.md)).
