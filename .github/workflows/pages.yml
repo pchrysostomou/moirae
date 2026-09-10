@@ -3,7 +3,11 @@ name: pages
 # Deploys the studio to GitHub Pages with the example traces beside it, so
 # the seed-19 demo opens in a browser with nothing installed:
 #   https://pchrysostomou.github.io/moirae/?trace=clean-partition.jsonl
-# Settings > Pages > Build and deployment > Source must be "GitHub Actions".
+# Settings > Pages > Build and deployment > Source must be "GitHub Actions";
+# until it is, the deploy job fails with "Failed to create deployment".
+# There is no configure-pages step: the base path is set at build time
+# (apps/studio/vite.config.ts), and the only thing that action would do
+# here is read the site settings, which 404s before Pages is enabled.
 
 on:
   push:
@@ -27,7 +31,6 @@ jobs:
     timeout-minutes: 10
     permissions:
       contents: read # checkout
-      pages: read # configure-pages reads the site settings (GET /repos/{owner}/{repo}/pages)
     steps:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
       - uses: pnpm/setup@84cb39b217b10273981911c288cd62326dc7c6d2 # v2.0.2
@@ -44,7 +47,6 @@ jobs:
       # The traces sit next to index.html, so ?trace=clean-partition.jsonl
       # resolves to /moirae/clean-partition.jsonl.
       - run: cp out/*.jsonl apps/studio/dist/
-      - uses: actions/configure-pages@983d7736d9b0ae728b81ab479565c72886d7745b # v5.0.0
       - uses: actions/upload-pages-artifact@56afc609e74202658d3ffba0e8f6dda462b719fa # v3.0.1
         with:
           path: apps/studio/dist
