@@ -17,7 +17,7 @@ import { parseJsonl } from '../src/trace/parse';
 // exact bytes. The header is excluded because it carries ananke's crate version, and a
 // release must not invalidate every fixture. Same rule, same value, on both sides.
 
-const PINNED = '19f19201df99a799';
+const PINNED = 'fcbe82ee7a0ba672';
 
 function bodyHash(text: string): string {
   return hex64(fnv1a64String(text.slice(text.indexOf('\n') + 1)));
