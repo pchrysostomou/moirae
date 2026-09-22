@@ -54,6 +54,9 @@ register sit beside it, built the same way from their papers.
 npm install moirae-core moirae-protocols
 ```
 
+**npm currently has 0.1.x, which is Raft only.** Paxos and ABD are on `main` as 0.2.0, and the
+npm release of it is pending.
+
 `moirae-core` is the engine, with no dependencies. `moirae-protocols` is the protocols, each with
 its safety invariants, to run under the engine or to copy as a starting point. Both need Node 20
 or newer. The `moirae` package is the CLI behind `npx moirae`: `demo`, `replay`, and the studio
